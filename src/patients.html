@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>East Pearl</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+<link rel="stylesheet" href="./styles/main.css" />
+<script src="./scripts/main.js"></script>
+<script src="./scripts/script.js"></script>
+
+<body>
+    <button class="homeButton" onclick="Home()">Home</button>
+    <div class="dashboard">
+        <div class="controls">
+            <button class="button">New</button>
+            <button class="button">Reload</button>
+        </div>
+        <table class="patientsTable">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Options</th>
+            </tr>
+        </table>
+    </div>
+    </div>
+</body>
+
+<script>
+    fetch(server + "customers").then(res => res.json()).then(data => {
+        let table = document.querySelector(".patientsTable");
+        data.forEach(ele => {
+            let row = document.createElement("tr");
+
+            let cell = document.createElement("td");
+            cell.innerHTML = ele.ID
+            row.appendChild(cell);
+
+            cell = document.createElement("td");
+            cell.innerHTML = ele.name
+            row.appendChild(cell);
+
+            cell = document.createElement("td");
+            cell.innerHTML = ele.address
+            row.appendChild(cell);
+
+            cell = document.createElement("td");
+            cell.innerHTML = ele.number
+            row.appendChild(cell);
+
+            cell = document.createElement("td");
+
+            let button1 = document.createElement("button");
+            let button2 = document.createElement("button");
+
+            button1.innerHTML = "edit";
+            button2.innerHTML = "delete";
+
+            cell.appendChild(button1);
+            cell.appendChild(button2);
+            row.appendChild(cell);
+
+            table.appendChild(row);
+        });
+    })
+</script>
+
+</html>

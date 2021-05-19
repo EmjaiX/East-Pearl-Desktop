@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>East Pearl</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+<link rel="stylesheet" href="./styles/main.css" />
+<script src="./scripts/main.js"></script>
+
+<script src="./scripts/script.js"></script>
+
+<body>
+    <button class="homeButton" onclick="Home()">Home</button>
+    <div class="dashboard">
+        <div class="controls">
+            <button class="button">New</button>
+            <button class="button">Reload</button>
+            <button class="button">View Covid Kits</button>
+            <div class="searchBox"><input type="text" name="search" id="searchInput" class="searchInput"><button class="button" id="searchButton">Search</button></div>
+        </div>
+        <table class="stockTable">
+            <tr>
+                <th>ID</th>
+                <th>Item</th>
+                <th>Cost</th>
+                <th>Quantity</th>
+                <th>Options</th>
+            </tr>
+        </table>
+    </div>
+    </div>
+</body>
+
+<script>
+    fetch(server + "stocks").then(res => res.json()).then(data => {
+        let table = document.querySelector(".stockTable");
+        data.forEach(ele => {
+            let row = document.createElement("tr");
+
+            let cell = document.createElement("td");
+            cell.innerHTML = ele.ID
+            row.appendChild(cell);
+
+            cell = document.createElement("td");
+            cell.innerHTML = ele.item
+            row.appendChild(cell);
+
+            cell = document.createElement("td");
+            cell.innerHTML = ele.cost
+            row.appendChild(cell);
+
+            cell = document.createElement("td");
+            cell.innerHTML = ele.quantity
+            row.appendChild(cell);
+
+            cell = document.createElement("td");
+            cell.innerHTML = "stuff"
+            row.appendChild(cell);
+
+            table.appendChild(row);
+        });
+    })
+</script>
+
+</html>
